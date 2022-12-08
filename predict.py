@@ -26,6 +26,10 @@ import argparse
 from invoicenet import FIELDS
 from invoicenet.acp.acp import AttendCopyParse
 
+import pytesseract
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\WalkerGA\AppData\Local\Tesseract-OCR\tesseract.exe'
+
 
 def main():
     ap = argparse.ArgumentParser()

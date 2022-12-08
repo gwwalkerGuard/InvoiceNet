@@ -29,6 +29,10 @@ import multiprocessing as mp
 from invoicenet import FIELDS, FIELD_TYPES
 from invoicenet.common import util
 
+import pytesseract
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\WalkerGA\AppData\Local\Tesseract-OCR\tesseract.exe'
+
 
 def process_file(filename, out_dir, phase, ocr_engine):
     try:

@@ -20,7 +20,9 @@
 
 from tkinter import Tk
 from invoicenet.gui.trainer import Trainer
+import pytesseract
 
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\WalkerGA\AppData\Local\Tesseract-OCR\tesseract.exe'
 
 def main():
     root = Tk()
