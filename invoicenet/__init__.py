@@ -30,9 +30,10 @@ FIELDS = dict()
 FIELDS["invoice_number"] = FIELD_TYPES["general"]
 FIELDS["vendor_name"] = FIELD_TYPES["general"]
 
-FIELDS["invoice_date"] = FIELD_TYPES["date"]
+FIELDS["invoice_date"] = FIELD_TYPES["general"]
+FIELDS["invoice_date_text"] = FIELD_TYPES["general"]
 
-FIELDS["net_amount"] = FIELD_TYPES["amount"]
-FIELDS["tax_amount"] = FIELD_TYPES["amount"]
-FIELDS["total_amount"] = FIELD_TYPES["amount"]
-FIELDS["tester"] = FIELD_TYPES["optional"]
+FIELDS["net_amount"] = FIELD_TYPES["general"]
+FIELDS["tax_amount"] = FIELD_TYPES["general"]
+FIELDS["total_amount"] = FIELD_TYPES["general"]
+

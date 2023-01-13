@@ -18,6 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import shutil
 import os
 import io
 import subprocess
@@ -263,6 +264,14 @@ class Extractor(Frame):
                     compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
                     highlightthickness=0, activebackground=self.background).grid(row=0, column=2, padx=10)
 
+        HoverButton(button_frame, image_path=r'widgets/labels.png', command=self._need_clarification, text='Bugged Invoice',
+                    compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
+                    highlightthickness=0, activebackground=self.background).grid(row=0, column=3, padx=10)
+
+        HoverButton(button_frame, image_path=r'widgets/labels.png', command=self._abundance, text='Redundant Invoice',
+                    compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
+                    highlightthickness=0, activebackground=self.background).grid(row=0, column=4, padx=10)
+
     def _extract(self):
         path = self.paths[self.pathidx]
 
@@ -382,6 +391,54 @@ class Extractor(Frame):
 
         self.logger.log("\nWrote information to '{}'".format(path))
 
+    def _need_clarification(self):
+
+        if self.pathidx == len(self.paths) - 1 or len(self.paths) == 0:
+            return
+        else:
+            self.pdf.close()
+            move = self.paths[self.pathidx]
+            self.pathidx += 1
+            self._load_file()
+            
+            shutil.move(move, r"training/clari")
+
+        # move = self.paths[self.pathidx-1]
+        # self._clear_queue()
+
+        # # if self.pdf is None:
+        # #     messagebox.showerror("Error", "Load an invoice first!")
+        # #     return
+
+        # # match = re.findall(r"[^{]*{([^}]+)}", self.logger.get())
+
+        # # if self.pathidx == len(self.paths) - 1 or len(self.paths) == 0:
+        # #     return
+        # # self.pathidx += 1
+        # # self._load_file()
+
+        # shutil.move(self.paths[self.pathidx-1], r"training/clari")
+
+    def _abundance(self):
+
+        # if self.pdf is None:
+        #     messagebox.showerror("Error", "Load an invoice first!")
+        #     return
+
+        # match = re.findall(r"[^{]*{([^}]+)}", self.logger.get())
+
+        if self.pathidx == len(self.paths) - 1 or len(self.paths) == 0:
+            return
+        else:
+            self.pdf.close()
+            move = self.paths[self.pathidx]
+            self.pathidx += 1
+            self._load_file()
+            shutil.move(move, r"training/abundance")
+        # self.pathidx += 1
+        # self._load_file()
+
+
     def _set_save_path(self):
         path = filedialog.askdirectory(title='Set Save Directory', initialdir=self.save_dir)
         if path == '' or not path:
@@ -429,6 +486,7 @@ class Extractor(Frame):
         self.viewer.clear()
         path = self.paths[self.pathidx]
         filename = os.path.basename(path)
+        #with pdfplumber.open(path) as pdf:
         try:
             if filename.split('.')[-1].lower() in ['jpg', 'png']:
                 image = Image.open(path)
