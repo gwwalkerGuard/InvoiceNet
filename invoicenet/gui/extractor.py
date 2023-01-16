@@ -264,13 +264,17 @@ class Extractor(Frame):
                     compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
                     highlightthickness=0, activebackground=self.background).grid(row=0, column=2, padx=10)
 
-        HoverButton(button_frame, image_path=r'widgets/labels.png', command=self._need_clarification, text='Bugged Invoice',
+        HoverButton(button_frame, image_path=r'widgets/labels.png', command=self._need_clarification, text='Memo/Strange',
                     compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
                     highlightthickness=0, activebackground=self.background).grid(row=0, column=3, padx=10)
 
         HoverButton(button_frame, image_path=r'widgets/labels.png', command=self._abundance, text='Redundant Invoice',
                     compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
-                    highlightthickness=0, activebackground=self.background).grid(row=0, column=4, padx=10)
+                    highlightthickness=0, activebackground=self.background).grid(row=1, column=1, padx=10)
+
+        HoverButton(button_frame, image_path=r'widgets/labels.png', command=self._multi, text='Multi Page Invoice',
+                    compound='center', font=("Arial", 10, "bold"), bd=0, bg=self.background,
+                    highlightthickness=0, activebackground=self.background).grid(row=1, column=2, padx=10)
 
     def _extract(self):
         path = self.paths[self.pathidx]
@@ -390,6 +394,19 @@ class Extractor(Frame):
             return
 
         self.logger.log("\nWrote information to '{}'".format(path))
+
+    def _multi(self):
+
+        if self.pathidx == len(self.paths) - 1 or len(self.paths) == 0:
+            return
+        else:
+            self.pdf.close()
+            move = self.paths[self.pathidx]
+            self.pathidx += 1
+            self._load_file()
+            
+            shutil.move(move, r"training/multi")
+
 
     def _need_clarification(self):
 
