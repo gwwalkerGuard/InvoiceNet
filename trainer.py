@@ -17,18 +17,23 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+import unittest
 
 from tkinter import Tk
 from invoicenet.gui.trainer import Trainer
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\WalkerGA\AppData\Local\Tesseract-OCR\tesseract.exe'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+class TestTrainer(unittest.TestCase):
+        def test_create_ngrams(self):
+            print("test_create_ngrams")
 
 def main():
     root = Tk()
     Trainer(root)
     root.mainloop()
-
 
 if __name__ == '__main__':
     main()

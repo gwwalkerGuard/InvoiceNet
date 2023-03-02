@@ -97,6 +97,7 @@ class Trainer(Frame):
         logo_frame.columnconfigure(2, weight=0)
         logo_frame.columnconfigure(3, weight=1)
         logo_frame.rowconfigure(0, weight=1)
+        cwd = os.getcwd()
 
         self.logo_img = ImageTk.PhotoImage(Image.open(r'widgets/logo.png'))
         Label(logo_frame, bg=self.background, image=self.logo_img).grid(row=0, column=1, sticky='news', pady=10)

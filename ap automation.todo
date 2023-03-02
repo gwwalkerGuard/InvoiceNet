@@ -1,0 +1,45 @@
+ap personel interface: 
+    (web app or local)
+    ☐ interface to say if the script run was success over the previous night 
+    ☐ interface to correct predicted data @critical
+    ☐ push corrected batch to update model @critical
+    ☐ push corrected data to script
+    
+overnight script entails:
+    ✔ get invoices from email address @done (3/1/2023, 11:23:07 AM)
+    ✔ fix the script to working order and formatted correctly @critical @done (3/1/2023, 11:53:03 AM)
+    ✔ sort pdfs by multipage and unreadables @critical @done (3/2/2023, 3:59:07 PM)
+         ✔ create folder in each date for unreadables and multipages @critical @done (3/1/2023, 1:52:14 PM)
+         ✔ differentiate pdfs by multipages  @critical @done (3/1/2023, 2:28:34 PM)
+         ☐ differentiate pdfs by unreadables @critical 
+            ☐ give that power to the user @critical 
+            ✔ remove memos @done (3/2/2023, 3:59:16 PM)
+    ✔ get pdfs in batch for previous data @critical @done (3/1/2023, 2:32:44 PM)
+    ✔ push cleaned pdfs to model @critical @done (3/2/2023, 1:40:44 PM)
+        ✔ figure out subprocess @critical @done (3/2/2023, 1:40:46 PM)
+        ☐ add fail case for subprocess failure @low 
+        ☐ need fail case for subprocess missing folder @low 
+    ☐ add skip to program if folder already sorted (maybe add a file call sorted) in func sortedFiles @high  
+    ☐ parse returned data FROM AP personel
+    ☐ push to payment server @critical
+    ☐ add a file that is written to abpout the status of the last run
+
+model entails:
+    ☐ providing predicted data @critical 
+
+
+payment server:
+    ☐ needs to be set up @critical 
+ETC:
+    ☐ make email dynamic, allowing it to be changed for user @critical 
+    ☐ make template @critical 
+    ☐ give script a dev dash @high 
+    ☐ clean invoicenet folder @low 
+    ☐ create function to aggregate all unreadable invoices and multipages
+    ☐ will need to setup email rules for new users or create an email for purely invoices 
+    ☐ add a 
+
+
+@critical cannot funtion without
+@high can function without but best to implement
+@low can function without

@@ -73,6 +73,8 @@ def main():
 
     for field in fields:
         print("\nExtracting field '{}' from {} invoices...\n".format(field, len(paths)))
+        print(paths)
+        
         model = AttendCopyParse(field=field, restore=True)
         predictions[field] = model.predict(paths=paths)
 
