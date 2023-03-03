@@ -1,4 +1,6 @@
-☐ environmentalize the secret key @critical
+✔ environmentalize the secret key @critical @done (3/3/2023, 3:21:18 PM)
+☐ figure out how to distribute the app and authorize new profiles 
+☐ figure out where to store pdfbank
 
 ap personel interface: 
     (web app or local)
