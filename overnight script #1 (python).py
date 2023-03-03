@@ -7,7 +7,6 @@ import warnings
 from datetime import date, datetime, timedelta
 from email.policy import strict
 from pathlib import Path
-
 import numpy as np
 import O365
 import pandas as pd
@@ -20,8 +19,9 @@ from O365.utils.token import FileSystemTokenBackend
 from pdf2image import convert_from_path
 from PIL import Image
 from pip import main
-
+import fnmatch
 import predict
+from decouple import config
 
 """main funcs"""
 
@@ -41,7 +41,7 @@ def refreshToken():
     O365.Connection.refresh_token
 
 def folderinit(__class):
-    locations = ["images","multipage","unreadbales","predictions"]
+    locations = ["images","multipage","unreadables","predictions"]
     path = __class.path 
     if os.path.isdir(path):
         return False
@@ -71,6 +71,11 @@ def getBatch(Automation):
     cleanFolder(Automation.path)
 
 def sortedFiles(__class):
+    
+    memos = [file for file in os.listdir(__class.path) if 'memo' in file.lower()]
+    for file in memos:
+        shutil.move(os.path.join(__class.path, file), os.path.join(__class.path,"unreadables"))
+    
     filenames = (file for file in os.listdir(__class.path) if file.endswith((".pdf")))
     for filename in filenames:
 
@@ -108,8 +113,10 @@ def testAPI(credentials):
 class Automation:
     def __init__(self):
         self.tk = FileSystemTokenBackend(token_filename="o365_token",token_path="/")
-        self.credentials = ('c28e3ca7-785d-4bde-b9cc-7c62cdd30566', 'rxP8Q~xz2Zv9O8QViYHoEUOEhOEDdkZY2RK_TbgD') 
-        self.account = Account(self.credentials)
+        # self.credentials =  #('c28e3ca7-785d-4bde-b9cc-7c62cdd30566', 'rxP8Q~xz2Zv9O8QViYHoEUOEhOEDdkZY2RK_TbgD') 
+        # print(self.credentials)
+
+        self.account = Account(config('credentials',default=''))
         self.mailbox = self.account.mailbox()
         self.inbox = self.mailbox.get_folder(folder_name='Inbox')
         self.invoices = self.inbox.get_folder(folder_name='Invoices')
@@ -122,9 +129,9 @@ class Automation:
 
 if __name__ == "__main__":
     emailAccount = Automation()
-    getBatch(emailAccount)
-    files,location = sortedFiles(emailAccount)
-    passToModel(location)
+    # getBatch(emailAccount)
+    # files,location = sortedFiles(emailAccount)
+    # passToModel(location)
     
     
 
