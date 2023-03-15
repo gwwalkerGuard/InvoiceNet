@@ -1,7 +1,12 @@
-☐ environmentalize the secret key @critical
+✔ environmentalize the secret key @critical @done (3/3/2023, 3:21:18 PM)
+☐ figure out how to distribute the app and authorize new profiles 
+☐ figure out where to store pdfbank
+☐ put a completion key to notify when the script was ran succefully by previous users (or just give that power to the user)
+☐ for some reason predict script is mixing up the name of the files (could not replicate on another day, weird)
 
 ap personel interface: 
     (web app or local)
+    ☐ notify the user 
     ☐ interface to say if the script run was success over the previous night 
     ☐ interface to correct predicted data @critical
     ☐ push corrected batch to update model @critical
@@ -25,6 +30,7 @@ overnight script entails:
     ☐ parse returned data FROM AP personel
     ☐ push to payment server @critical
     ☐ add a file that is written to abpout the status of the last run
+
 
 model entails:
     ☐ providing predicted data @critical 

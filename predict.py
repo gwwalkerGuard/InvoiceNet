@@ -60,6 +60,8 @@ def main():
     else:
         paths = [os.path.abspath(f) for f in glob.glob(args.data_dir + "**/*.pdf", recursive=True)]
 
+    print(paths)
+
     if not os.path.exists('./models/invoicenet/'):
         print("Could not find any trained models!")
         return
@@ -79,6 +81,7 @@ def main():
         predictions[field] = model.predict(paths=paths)
 
     os.makedirs(args.pred_dir, exist_ok=True)
+    
     for idx, filename in enumerate(paths):
         filename = os.path.basename(filename)[:-3] + 'json'
         labels = {}

@@ -111,12 +111,14 @@ class AttendCopyParse(Model):
             .batch(batch_size=1, drop_remainder=False)
 
         predictions = []
+        
         for sample in dataset:
             try:
                 logits = self.model(sample, training=False)
                 chars = tf.argmax(logits, axis=2, output_type=tf.int32).numpy()
                 predictions.extend(data.array_to_str(chars))
             except tf.errors.OutOfRangeError:
+                #predictions.extend('bugged')
                 break
 
         return predictions
