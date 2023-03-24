@@ -3,7 +3,7 @@
 ☐ figure out where to store pdfbank
 ☐ put a completion key to notify when the script was ran succefully by previous users (or just give that power to the user)
 ☐ for some reason predict script is mixing up the name of the files (could not replicate on another day, weird)
-
+☐ need to install requirements on main pc but data is a limiting factor
 ap personel interface: 
     (web app or local)
     ☐ notify the user 
