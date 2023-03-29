@@ -1,3 +1,4 @@
+# %%
 import os
 import re
 import shutil
@@ -21,7 +22,8 @@ from PIL import Image
 from pip import main
 import fnmatch
 import predict
-from decouple import config
+from dotenv import load_dotenv
+import simplejson
 
 """main funcs"""
 
@@ -95,9 +97,27 @@ def passToModel(location):
     print(' '.join(execution))
     subprocess.run(' '.join(execution),check=True)
     
-# def passToModel(files):
-#     for file in files:
-
+def generateStatus(status,location):
+    f = open(os.path.join(location, "status.txt"), "w")
+    simplejson.dump(status, f)
+    f.close()
+    
+def generateExcel(__class):
+    predictFrame = pd.DataFrame()
+    
+    for file in os.listdir(os.path.join(__class.path,"predictions")):
+        df = pd.read_json(os.path.join(os.path.join(__class.path,"predictions"),file),
+                      typ='series')
+    
+        df = pd.DataFrame(df)
+        df = df.T 
+        df["FileName"] = file
+    
+        predictFrame = predictFrame.append(df)
+    
+    predictFrame.to_excel(os.path.join(__class.path,"predictions.xlsx"),
+                          index = False)
+    
 """Test Functions"""
        
 def testAPI(credentials):
@@ -115,8 +135,10 @@ class Automation:
         self.tk = FileSystemTokenBackend(token_filename="o365_token",token_path="/")
         # self.credentials =  #('c28e3ca7-785d-4bde-b9cc-7c62cdd30566', 'rxP8Q~xz2Zv9O8QViYHoEUOEhOEDdkZY2RK_TbgD') 
         # print(self.credentials)
-
-        self.account = Account(config('credentials',default=''))
+        load_dotenv()
+        APPID = os.getenv("APPID")
+        SECRET = os.getenv("SECRET")
+        self.account = Account((APPID,SECRET))
         self.mailbox = self.account.mailbox()
         self.inbox = self.mailbox.get_folder(folder_name='Inbox')
         self.invoices = self.inbox.get_folder(folder_name='Invoices')
@@ -125,13 +147,24 @@ class Automation:
         self.query = self.invoices.new_query().on_attribute('created_date_time').greater_equal(pd.to_datetime(self.lateDate)).less(pd.to_datetime(self.lateDate+timedelta(days=1)))
         self.attachList = []
 
+
 """main script"""
 
 if __name__ == "__main__":
-    emailAccount = Automation()
-    # getBatch(emailAccount)
-    # files,location = sortedFiles(emailAccount)
-    # passToModel(location)
-    
-    
+    try:
+        status = []
+        emailAccount = Automation()
+        status.append(0)
+        getBatch(emailAccount)
+        status.append(0)
+        files,location = sortedFiles(emailAccount)
+        status.append(0)
+        passToModel(location)
+        status.append(0)
+        generateStatus(status,location)
+        generateExcel(emailAccount)
+    except:
+        folderinit(emailAccount)
+        generateStatus(status,emailAccount.path)
+
 
