@@ -35,4 +35,4 @@ FIELDS["invoice_date"] = FIELD_TYPES["general"]
 FIELDS["total_amount"] = FIELD_TYPES["general"]
 FIELDS["Bill_To"] = FIELD_TYPES["general"]
 
-FIELDS["dsec"] = FIELD_TYPES["general"]
+#FIELDS["dsec"] = FIELD_TYPES["general"]

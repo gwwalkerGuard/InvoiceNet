@@ -1,9 +1,15 @@
 ✔ environmentalize the secret key @critical @done (3/3/2023, 3:21:18 PM)
+✔ token expired @started (3/30/2023, 11:37:55 AM) @done (3/30/2023, 11:39:37 AM)
+✔ create column for edited by ap personnel (correct, fixed) @started (3/30/2023, 11:54:18 AM) @done (3/30/2023, 11:55:34 AM)
+☐ normalize the columns for total amount and invoice_date @started (3/30/2023, 11:56:43 AM)
+☐ save as two different files to keep track of analytics 
+☐ invoice date normalization is tricky - to be fixed later 
 ☐ figure out how to distribute the app and authorize new profiles 
 ☐ figure out where to store pdfbank
 ☐ put a completion key to notify when the script was ran succefully by previous users (or just give that power to the user)
 ☐ for some reason predict script is mixing up the name of the files (could not replicate on another day, weird)
 ☐ need to install requirements on main pc but data is a limiting factor
+☐ remove images folder - redundant 
 ap personel interface: 
     (web app or local)
     ☐ notify the user 
@@ -51,3 +57,7 @@ ETC:
 @critical cannot funtion without
 @high can function without but best to implement
 @low can function without
+
+Fixed 
+Template 
+Predictions2
