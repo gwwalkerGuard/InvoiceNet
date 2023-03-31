@@ -10,6 +10,7 @@
 ☐ for some reason predict script is mixing up the name of the files (could not replicate on another day, weird)
 ☐ need to install requirements on main pc but data is a limiting factor
 ☐ remove images folder - redundant 
+☐ need to set catch case for the event if current day folder is the only one in the folder 
 ap personel interface: 
     (web app or local)
     ☐ notify the user 
